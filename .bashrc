@@ -75,4 +75,5 @@ export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear"
 #Record each line as it gets issued
 PROMPT_COMMAND='history -a'
 
-
+# Setting Bash PS1
+export PS1="\e[1;34m \u@\h \w|[\t]|\$?> \e[m "
