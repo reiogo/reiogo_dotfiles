@@ -3,6 +3,8 @@ alias config='/usr/bin/git --git-dir=/home/reiro/.cfg/ --work-tree=/home/reiro'
 # ~/.bashrc
 #
 
+set -o vi
+
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
@@ -51,4 +53,26 @@ use_color=true
 # dircolors --print-database uses its own built-in database
 alias ll="ls -hl"
 alias v="vim"
+
+## Smarter tab-completion
+
+#perfrom file completion in a case insensitive fashion
+bind "set completion-ignore-case on"
+
+# History
+
+# avoid duplicate entries in history
+HISTCONTROL="erasedups:ignoreboth"
+
+# Append to history file
+shopt -s histappend
+
+#save multi-line commands as one command
+shopt -s cmdhist
+# Don't record some commands
+export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear"
+
+#Record each line as it gets issued
+PROMPT_COMMAND='history -a'
+
 
