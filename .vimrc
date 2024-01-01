@@ -108,9 +108,17 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 nnoremap H 0
 nnoremap L $
-nnoremap <leader>w <C-w>
+nnoremap <M-l> <C-w>l
+nnoremap <M-j> <C-w>j
+nnoremap <M-k> <C-w>k
+nnoremap <M-h> <C-w>h
+
+
+
 
 
 " for all buffers
 let g:slime_target = "tmux"
 let g:slime_bracketed_paste = 1
+
+colorscheme desert
