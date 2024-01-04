@@ -2,7 +2,10 @@
 alias v="vim"
 
 # config git.bare account
-alias config='/usr/bin/git --git-dir=/home/reiro/.cfg/ --work-tree=/home/reiro'
+# alias config='/usr/bin/git --git-dir=/home/reiro/.cfg/ --work-tree=/home/reiro'
+
+# config log to be more useful
+alias git log='git log --all --graph --decorate'
 
 # Use colors in coreutils utilities output
 alias ls='ls --color=auto'
@@ -127,4 +130,4 @@ fpr() {
 # Mirror stdout to stderr, useful for seeing data going through a pipe
 alias peek='tee >(cat 1>&2)'
 
-alias config log='config log --all --graph --decorate'
+
