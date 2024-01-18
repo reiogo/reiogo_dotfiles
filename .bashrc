@@ -20,7 +20,6 @@ source ~/.bash/plugins.bash
 source ~/.bash/prompt.bash
 
 
-set -o vi
 
 
 

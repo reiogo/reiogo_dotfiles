@@ -120,6 +120,7 @@ Plug 'https://github.com/jeetsukumaran/vim-buffergator'
 Plug 'dense-analysis/ale'
 Plug 'https://github.com/mileszs/ack.vim'
 Plug 'easymotion/vim-easymotion'
+Plug 'christoomey/vim-tmux-navigator'
 call plug#end()
 
 
@@ -144,6 +145,10 @@ noremap <leader>- 0v$y<esc>dd<esc>p
 noremap <leader>_ 0v$y<esc>dd<esc>kkp
 noremap <leader><c-u> viwu
 
+" mapping H and L for more sensible move to start and end of line binds
+nnoremap L $
+nnoremap H 0
+
 "making it so i can access vimrc quickly from vim
 nnoremap <leader>ev :vsplit ~/.vimrc<cr>
 nnoremap <leader>sv :source ~/.vimrc<cr> 
@@ -152,20 +157,10 @@ set showcmd
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'ctrlp'
 
-" trying to get the window movements on the alt key
-nnoremap <C-l> <C-w>l
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-h> <C-w>h
-
-" nnoremap <M-l> <C-w>l
-" nnoremap <M-j> <C-w>j
-" nnoremap <M-k> <C-w>k
-" nnoremap <M-h> <C-w>h
-
 " for all buffers
 let g:slime_target = "tmux"
 let g:slime_bracketed_paste = 1
+
 
 colorscheme desert
 
@@ -173,8 +168,7 @@ colorscheme desert
 " Plugin configuration
 "---------------------
 
-" nerdtree
-nnoremap <Leader>n :NERDTreeToggle<CR>
+" nerdtree nnoremap <Leader>n :NERDTreeToggle<CR>
 nnoremap <Leader>f :NERDTreeFind<CR>
 
 " buffergator
@@ -194,4 +188,5 @@ if executable('ag')
     let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
     let g:ackprg = 'ag --vimgrep'
 endif
+
 
