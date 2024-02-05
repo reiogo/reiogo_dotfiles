@@ -152,6 +152,7 @@ noremap <leader>-      0v$y<esc>dd<esc>p
 noremap <leader>_      0v$y<esc>dd<esc>kkp
 noremap <leader><c-u>  viwu
 
+
 " I want to make it so I can jump to a place and have it centered rather
 " easily
 nnoremap  <space> ggzz
@@ -162,7 +163,8 @@ nnoremap H 0
 nnoremap U H
 nnoremap D L
 
-"making it so I can access vimrc quickly from vim
+
+"making it so i can access vimrc quickly from vim
 nnoremap <leader>ev :vsplit ~/.vimrc<cr>
 nnoremap <leader>sv :source ~/.vimrc<cr> 
 set showcmd
