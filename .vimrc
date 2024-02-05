@@ -139,17 +139,30 @@ inoremap <left>  <esc>:echoe "use h"<cr>
 inoremap <right> <esc>:echoe "use l"<cr>
 inoremap <up>    <esc>:echoe "use k"<cr>
 inoremap <down>  <esc>:echoe "use j"<cr>
+
+" I should just be more careful, but I hate that this can mess with my code
+" without me realizing it, so I'm going to remap the lowercase function to
+" require a leader
+noremap gu          :echoe "use leader l"<cr> 
+noremap <leader>l   gu
+
 "some vimscript practice
 
-noremap <leader>- 0v$y<esc>dd<esc>p
-noremap <leader>_ 0v$y<esc>dd<esc>kkp
-noremap <leader><c-u> viwu
+noremap <leader>-      0v$y<esc>dd<esc>p
+noremap <leader>_      0v$y<esc>dd<esc>kkp
+noremap <leader><c-u>  viwu
+
+" I want to make it so I can jump to a place and have it centered rather
+" easily
+nnoremap  <space> ggzz
 
 " mapping H and L for more sensible move to start and end of line binds
 nnoremap L $
 nnoremap H 0
+nnoremap U H
+nnoremap D L
 
-"making it so i can access vimrc quickly from vim
+"making it so I can access vimrc quickly from vim
 nnoremap <leader>ev :vsplit ~/.vimrc<cr>
 nnoremap <leader>sv :source ~/.vimrc<cr> 
 set showcmd

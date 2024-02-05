@@ -130,4 +130,4 @@ fpr() {
 # Mirror stdout to stderr, useful for seeing data going through a pipe
 alias peek='tee >(cat 1>&2)'
 
-
+alias mit="cd ~/Desktop/Programming/Python/mitpython/PS"
