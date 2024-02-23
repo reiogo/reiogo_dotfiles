@@ -155,7 +155,7 @@ noremap <leader><c-u>  viwu
 
 " I want to make it so I can jump to a place and have it centered rather
 " easily
-nnoremap  <space> ggzz
+" nnoremap  <space> ggzz
 
 " mapping H and L for more sensible move to start and end of line binds
 nnoremap L $
@@ -204,4 +204,11 @@ if executable('ag')
     let g:ackprg = 'ag --vimgrep'
 endif
 
+" ultisnips
+let g:UltiSnipsExpandTrigger       = '<Tab>'    " use Tab to expand snippets
+let g:UltiSnipsJumpForwardTrigger  = '<Tab>'    " use Tab to move forward through tabstops
+let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'  " use Shift-Tab to move backward through tabstops
+let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips'] " ultisnips only goes through this file 
 
+" psql?
+au BufRead /tmp/psql.edit.* set syntax=sql
