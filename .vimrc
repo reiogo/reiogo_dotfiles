@@ -1,11 +1,18 @@
+"  ------------------
+" Appearances
+" ------------------
+
 " Turn on syntax highlighting.
 set nocompatible
 
 " ------------------
 " syntax and indent
 " ------------------
+
 syntax on " turn on syntax highlighting
 set showmatch " show matching braces when text indicator is over them
+" making it easier to see the matches parenthesese etc.
+hi MatchParen cterm=bold ctermbg=none ctermfg=green
 
 " Exit Vim if NERDTree is the only window remaining in the only tab.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
@@ -16,31 +23,11 @@ augroup cursorlineonlyinactivewindow
     autocmd vimenter,winenter,bufwinenter * setlocal cursorline
     autocmd winleave * setlocal nocursorline
 augroup end
-" vim can autodetect this based on $term (e.g. 'xterm-256color')
-" but it can be set to force 256 colors
-" set t_co=256
-if has('gui_running')
-    colorscheme solarized
-    let g:lightline = {'colorscheme': 'solarized'}
-" elseif &t_co < 256
-"    colorscheme default
-"    set nocursorline " looks bad in this mode
-else
-    set background=dark
-    let g:solarized_termcolors=256 " instead of 16 color with mapping in terminal
-    colorscheme solarized
-    " customized colors
-    highlight signcolumn ctermbg=234
-    highlight statusline cterm=bold ctermfg=245 ctermbg=235
-    highlight statuslinenc cterm=bold ctermfg=245 ctermbg=235
-    let g:lightline = {'colorscheme': 'dark'}
-    highlight spellbad cterm=underline
-    " patches
-    highlight cursorlinenr cterm=none
-endif
 
 filetype plugin indent on " enable file type detection
 set autoindent
+
+
 "---------------------
 " basic editing config
 "---------------------
@@ -96,6 +83,7 @@ if &term =~ '^screen'
 set ttymouse=xterm2
 endif
 set nofoldenable " disable folding by default
+
 "--------------------
 " misc configurations
 "--------------------
@@ -107,22 +95,28 @@ set splitbelow
 set splitright
 
 "mapping leader and local leader
-let mapleader = ","
+nnoremap <SPACE> <nop>
+let mapleader = " "
 let maplocalleader = "\\"
 
 "directory and use of vim plugin vim-plug
 call plug#begin('~/.vim/plugged')
-Plug 'altercation/vim-colors-solarized'
-Plug 'jalvesaq/nvim-r'
+Plug 'preservim/nerdtree'
+Plug 'kien/ctrlp.vim'
+Plug 'dense-analysis/ale'
 Plug 'jpalardy/vim-slime'
 Plug 'sjl/gundo.vim'
-Plug 'https://github.com/jeetsukumaran/vim-buffergator'
-Plug 'dense-analysis/ale'
-Plug 'https://github.com/mileszs/ack.vim'
-Plug 'easymotion/vim-easymotion'
 Plug 'christoomey/vim-tmux-navigator'
 call plug#end()
 
+packadd! srcery-vim
+" colorscheme srcery
+
+ colorscheme solarized
+ set background=dark
+
+" colorscheme dracula has to be after plugins
+" colorscheme dracula
 
 " try to prevent bad habits like using the arrow keys for movement. this is
 " not the only possible bad habit. for example, holding down the h/j/k/l keys
@@ -167,36 +161,34 @@ nnoremap D L
 "making it so i can access vimrc quickly from vim
 nnoremap <leader>ev :vsplit ~/.vimrc<cr>
 nnoremap <leader>sv :source ~/.vimrc<cr> 
+
+
 set showcmd
-"ctrlp mapping
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'ctrlp'
+
+
 
 " for all buffers
 let g:slime_target = "tmux"
 let g:slime_bracketed_paste = 1
 
 
-colorscheme desert
 
 "---------------------
 " Plugin configuration
 "---------------------
 
-" nerdtree nnoremap <Leader>n :NERDTreeToggle<CR>
+" nerdtree ------------------
+" nnoremap <Leader>n :NERDTreeToggle<CR>
 nnoremap <Leader>f :NERDTreeFind<CR>
 
-" buffergator
-let g:buffergator_suppress_keymaps = 1
-nnoremap <Leader>b :BuffergatorToggle<CR>
 
-" gundo
+" gundo  --------------------
 nnoremap <Leader>u :GundoToggle<CR>
 if has('python3')
     let g:gundo_prefer_python3 = 1
 endif
 
-" ag / ack.vim
+" ag / ack.vim ----------------------
 command -nargs=+ Gag Gcd | Ack! <args>
 nnoremap K :Gag "\b<C-R><C-W>\b"<CR>:cw<CR>
 if executable('ag')
@@ -204,11 +196,49 @@ if executable('ag')
     let g:ackprg = 'ag --vimgrep'
 endif
 
-" ultisnips
+" ultisnips -----------------------
 let g:UltiSnipsExpandTrigger       = '<Tab>'    " use Tab to expand snippets
-let g:UltiSnipsJumpForwardTrigger  = '<Tab>'    " use Tab to move forward through tabstops
+let g:UltiSnipsJumpForwardTrigger  = 'jk'    " use jk to move forward through tabstops
 let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'  " use Shift-Tab to move backward through tabstops
 let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips'] " ultisnips only goes through this file 
 
-" psql?
+" psql? --------------------
 au BufRead /tmp/psql.edit.* set syntax=sql
+
+"R has a weird problem converting _ to <--
+let R_assign_map = "|"
+
+" vimtex -------------------------
+" Use `<localleader>c` to trigger continuous compilation...
+" nmap <localleader>c <Plug>(vimtex-compile)
+
+" ...or single-shot compilation, if you prefer.
+nmap <leader>c <Plug>(vimtex-compile-ss)
+
+" Use <leader>ss in normal mode to refresh UltiSnips snippets
+nnoremap <localleader>s <Cmd>call UltiSnips#RefreshSnippets()<CR>
+
+" ale --------------------
+" Set this in your vimrc file to disabling highlighting
+highlight ALEWarning ctermbg=DarkMagenta
+" the sign in the sign gutter
+let g:ale_sign_warning = "->"
+" sign gutter alway on
+let g:ale_sign_column_always = 1
+" current line only
+let g:ale_virtualtext_cursor = 'current'
+" sign column color
+highlight clear SignColumn
+"enable python linter
+let g:ale_linters = {'python': ['pyflakes']}
+
+
+
+
+
+"ctrlp mapping ----------------------
+" let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'ctrlp'
+nnoremap <leader>p :CtrlP<cr>
+
+

@@ -7,3 +7,24 @@ endsnippet
 snippet ff "The LaTeX \frac{}{} command"
 \frac{$1}{$2}$0
 endsnippet
+
+# Snippet for inserting named links with href
+snippet hr "The hyperref package's \href{}{} command (for url links)"
+\href{${1:url}}{${2:display name}}$0
+endsnippet
+
+# Snippet for creating new generic LaTeX environments
+snippet env "New LaTeX environment" b
+\begin{$1}
+	$2
+\end{$1}
+$0
+endsnippet
+
+# Snippet for italic font
+snippet tii "The \textit{} command for italic font"
+\textit{${1:${VISUAL:}}}$0
+endsnippet
+
+
+
