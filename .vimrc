@@ -1,4 +1,4 @@
-"  ------------------
+"get_permutation ------------------
 " Appearances
 " ------------------
 
@@ -25,6 +25,7 @@ augroup cursorlineonlyinactivewindow
 augroup end
 
 filetype plugin indent on " enable file type detection
+
 set autoindent
 
 
@@ -61,7 +62,6 @@ set hidden
 set ignorecase
 set smartcase 
 set incsearch " unbind some useless/annoying default key bindings.
-nmap q <nop> " 'q' in normal mode enters ex mode. you almost never want this.
 " enable mouse support. you should avoid relying on this too much, but it can
 " sometimes be convenient.
 set mouse+=a
@@ -95,28 +95,35 @@ set splitbelow
 set splitright
 
 "mapping leader and local leader
-nnoremap <SPACE> <nop>
 let mapleader = " "
 let maplocalleader = "\\"
 
 "directory and use of vim plugin vim-plug
 call plug#begin('~/.vim/plugged')
-Plug 'preservim/nerdtree'
+Plug 'vim-scripts/dbext.vim'
+Plug 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-entire'
 Plug 'kien/ctrlp.vim'
+Plug 'bps/vim-textobj-python'
+Plug 'tpope/vim-commentary'
 Plug 'dense-analysis/ale'
-Plug 'jpalardy/vim-slime'
-Plug 'sjl/gundo.vim'
-Plug 'christoomey/vim-tmux-navigator'
 call plug#end()
 
 packadd! srcery-vim
 " colorscheme srcery
+" colorscheme solarized
 
- colorscheme solarized
- set background=dark
-
-" colorscheme dracula has to be after plugins
-" colorscheme dracula
+if strftime ('%H') >19 
+    colorscheme srcery
+" elseif strftime ('%H') <4
+"     colorscheme srcery
+" elseif strftime ('%H') >17
+"     colorscheme solarized
+"     set background=dark
+else
+    colorscheme solarized
+    set background=light
+endif
 
 " try to prevent bad habits like using the arrow keys for movement. this is
 " not the only possible bad habit. for example, holding down the h/j/k/l keys
@@ -134,11 +141,21 @@ inoremap <right> <esc>:echoe "use l"<cr>
 inoremap <up>    <esc>:echoe "use k"<cr>
 inoremap <down>  <esc>:echoe "use j"<cr>
 
+" I'm setting up movement keys
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-l> <c-w>l
+nnoremap <c-h> <c-w>h
+
+
+
 " I should just be more careful, but I hate that this can mess with my code
 " without me realizing it, so I'm going to remap the lowercase function to
 " require a leader
-noremap gu          :echoe "use leader l"<cr> 
-noremap <leader>l   gu
+" nnoremap gu          :echoe "use leader l"<cr> 
+" nnoremap <leader>l   gu
+" vnoremap u :echoe "user leader l"<cr>
+" vnoremap <leader>l u
 
 "some vimscript practice
 
@@ -179,22 +196,14 @@ let g:slime_bracketed_paste = 1
 
 " nerdtree ------------------
 " nnoremap <Leader>n :NERDTreeToggle<CR>
-nnoremap <Leader>f :NERDTreeFind<CR>
+" nnoremap <Leader>f :NERDTreeFind<CR>
 
 
 " gundo  --------------------
-nnoremap <Leader>u :GundoToggle<CR>
-if has('python3')
-    let g:gundo_prefer_python3 = 1
-endif
-
-" ag / ack.vim ----------------------
-command -nargs=+ Gag Gcd | Ack! <args>
-nnoremap K :Gag "\b<C-R><C-W>\b"<CR>:cw<CR>
-if executable('ag')
-    let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
-    let g:ackprg = 'ag --vimgrep'
-endif
+" nnoremap <Leader>u :GundoToggle<CR>
+" if has('python3')
+"     let g:gundo_prefer_python3 = 1
+" endif
 
 " ultisnips -----------------------
 let g:UltiSnipsExpandTrigger       = '<Tab>'    " use Tab to expand snippets
@@ -204,6 +213,8 @@ let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips'] " ultisnips only goe
 
 " psql? --------------------
 au BufRead /tmp/psql.edit.* set syntax=sql
+let g:dbext_default_profile_postgres ='type=PGSQL:user=postgres:dbname=tysql'
+let g:dbext_default_profile = 'postgres'
 
 "R has a weird problem converting _ to <--
 let R_assign_map = "|"
@@ -219,26 +230,35 @@ nmap <leader>c <Plug>(vimtex-compile-ss)
 nnoremap <localleader>s <Cmd>call UltiSnips#RefreshSnippets()<CR>
 
 " ale --------------------
-" Set this in your vimrc file to disabling highlighting
-highlight ALEWarning ctermbg=DarkMagenta
+" Virtual text color
+highlight ALEVirtualTextError ctermfg=Black
 " the sign in the sign gutter
+let g:ale_sign_warning = '--'
 let g:ale_sign_warning = "->"
 " sign gutter alway on
 let g:ale_sign_column_always = 1
-" current line only
-let g:ale_virtualtext_cursor = 'current'
 " sign column color
 highlight clear SignColumn
 "enable python linter
-let g:ale_linters = {'python': ['pyflakes']}
-
-
-
-
+let g:ale_linters = {'python': ['pyflakes'], 'cpp': ['cc']}
 
 "ctrlp mapping ----------------------
 " let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'ctrlp'
 nnoremap <leader>p :CtrlP<cr>
+" inoremap <C-p> <esc>:echoe "wrong"<cr><esc>:startinsert<cr>
+
+" running python in vim --------------------
+autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+autocmd FileType python imap <buffer> <F9> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+
+" running haskell on vim? -------------------
+autocmd FileType haskell map <buffer> <F9> :w<CR>:exec '!ghc' shellescape(@%, 1)<CR>
+autocmd FileType haskell imap <buffer> <F9> <esc>:w<CR>:exec '!ghc' shellescape(@%, 1)<CR>
+
+" running cpp on vim? -------------------
+autocmd FileType cpp map <buffer> <F9> :w<CR>:exec '!g++' shellescape(@%, 1)<CR>
+autocmd FileType cpp imap <buffer> <F9> <esc>:w<CR>:exec '!g++' shellescape(@%, 1)<CR>
 
 
+  

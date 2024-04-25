@@ -1,4 +1,6 @@
-# Ifs
+########################################
+#Conditionals and Loops#
+########################################
 snippet if
 	if $1:
 		${0:${VISUAL}}
@@ -29,4 +31,25 @@ snippet pr
 	print($0)
 endsnippet
 
-		
+
+########################################
+# Class & Special Method Name Snippets #
+########################################
+
+snippet get  "setting up get" b
+def get_${1:name}(self):
+	return ${2:pass}
+endsnippet
+
+snippet set "setting up set" b
+def set_${1:name}(self, ${2:var}):
+	return ${3:pass} =${2:var}
+endsnippet
+
+########################################
+#Misc#
+########################################
+
+snippet p "print something" 
+print("${1:text}", ${2:elem})
+endsnippet

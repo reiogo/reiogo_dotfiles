@@ -1,4 +1,5 @@
 # use vim easily
+alias ee="exit"
 alias v="vim"
 
 # config git.bare account
@@ -8,7 +9,7 @@ alias config='/usr/bin/git --git-dir=/home/reiro/.cfg/ --work-tree=/home/reiro'
 #alias git log='git log --all --graph --decorate'
 
 # Use colors in coreutils utilities output
-alias ls='ls --color=auto'
+alias ls='ls --color=auto -F'
 alias grep='grep --color'
 
 #adding things in order to practice git stash
@@ -132,4 +133,4 @@ fpr() {
 # Mirror stdout to stderr, useful for seeing data going through a pipe
 alias peek='tee >(cat 1>&2)'
 
-alias mit="cd ~/Desktop/Programming/Python/mitpython/PS/PS3"
+alias mit="cd ~/Desktop/Programming/Python/mitpython/PS/6.0002/PS1"
