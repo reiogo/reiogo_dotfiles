@@ -1,5 +1,5 @@
 "get_permutation ------------------
-" Appearances
+" Appearances --
 " ------------------
 
 " Turn on syntax highlighting.
