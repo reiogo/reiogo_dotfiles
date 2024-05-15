@@ -25,6 +25,7 @@ augroup cursorlineonlyinactivewindow
 augroup end
 
 filetype plugin indent on " enable file type detection
+runtime macros/matchit.vim
 
 set autoindent
 
@@ -41,7 +42,7 @@ set number " show line numbers.
 " this is useful because you can tell, at a glance, what count is needed to
 " jump up or down to a particular line, by {count}k to go up or {count}j to go
 " down.
-set relativenumber " always show the status line at the bottom, even if you only have one window open.
+" set relativenumber " always show the status line at the bottom, even if you only have one window open.
 set laststatus=2
 " the backspace key has slightly unintuitive behavior by default. for example,
 " by default, you can't backspace before the insertion point set with 'i'.
@@ -100,6 +101,7 @@ let maplocalleader = "\\"
 
 "directory and use of vim plugin vim-plug
 call plug#begin('~/.vim/plugged')
+Plug 'tpope/vim-surround'
 Plug 'vim-scripts/dbext.vim'
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-entire'
@@ -110,16 +112,12 @@ Plug 'dense-analysis/ale'
 call plug#end()
 
 packadd! srcery-vim
-" colorscheme srcery
-" colorscheme solarized
 
 if strftime ('%H') >19 
     colorscheme srcery
-" elseif strftime ('%H') <4
-"     colorscheme srcery
-" elseif strftime ('%H') >17
-"     colorscheme solarized
-"     set background=dark
+elseif strftime ('%H') >17
+    colorscheme solarized
+    set background=dark
 else
     colorscheme solarized
     set background=light

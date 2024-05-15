@@ -1,6 +1,7 @@
 # use vim easily
 alias ee="exit"
 alias v="vim"
+alias x="xdg-open"
 
 # config git.bare account
 alias config='/usr/bin/git --git-dir=/home/reiro/.cfg/ --work-tree=/home/reiro'
@@ -134,3 +135,5 @@ fpr() {
 alias peek='tee >(cat 1>&2)'
 
 alias mit="cd ~/Desktop/Programming/Python/mitpython/PS/6.0002/PS1"
+alias odin="cd ~/repos/css-exercises/"
+alias code="cd ~/Desktop/Programming/Coding/code"
