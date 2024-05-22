@@ -101,6 +101,7 @@ let maplocalleader = "\\"
 
 "directory and use of vim plugin vim-plug
 call plug#begin('~/.vim/plugged')
+Plug 'morhetz/gruvbox'
 Plug 'tpope/vim-surround'
 Plug 'vim-scripts/dbext.vim'
 Plug 'kana/vim-textobj-user'
@@ -114,7 +115,7 @@ call plug#end()
 packadd! srcery-vim
 
 if strftime ('%H') >19 
-    colorscheme srcery
+    colorscheme gruvbox
 elseif strftime ('%H') >17
     colorscheme solarized
     set background=dark
