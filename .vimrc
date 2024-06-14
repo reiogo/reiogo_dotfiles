@@ -1,4 +1,4 @@
-"get_permutation ------------------
+" ------------------
 " Appearances --
 " ------------------
 
@@ -84,6 +84,8 @@ if &term =~ '^screen'
 set ttymouse=xterm2
 endif
 set nofoldenable " disable folding by default
+let $VIM='~/.vim/'
+set modifiable
 
 "--------------------
 " misc configurations
@@ -114,9 +116,11 @@ call plug#end()
 
 packadd! srcery-vim
 
-if strftime ('%H') >19 
+if strftime ('%H') > 19 
     colorscheme gruvbox
-elseif strftime ('%H') >17
+elseif strftime ('%H') < 7
+    colorscheme gruvbox
+elseif strftime ('%H') > 17
     colorscheme solarized
     set background=dark
 else

@@ -12,6 +12,8 @@ export EDITOR=vim
 h=`date +%k`
 if [ $h -gt 19 ]; then
     konsoleprofile colors=Gruvbox
+elif [ $h -lt 7 ] ; then
+    konsoleprofile colors=Gruvbox
 elif [ $h -gt 17 ] ; then
     konsoleprofile colors=Solarized
 else

@@ -135,5 +135,6 @@ fpr() {
 alias peek='tee >(cat 1>&2)'
 
 alias mit="cd ~/Desktop/Programming/Python/mitpython/PS/6.0002/PS1"
-alias odin="cd ~/repos/css-exercises/"
+alias odin="cd ~/repos/odin_calculator"
 alias code="cd ~/Desktop/Programming/Coding/code"
+alias c="cd ~/c/c_projects/http_server_c/socket_programming"
