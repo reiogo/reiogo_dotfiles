@@ -12,7 +12,7 @@ set nocompatible
 syntax on " turn on syntax highlighting
 set showmatch " show matching braces when text indicator is over them
 " making it easier to see the matches parenthesese etc.
-hi MatchParen cterm=bold ctermbg=none ctermfg=green
+hi MatchParen cterm=bold ctermbg=red ctermfg=red
 
 " Exit Vim if NERDTree is the only window remaining in the only tab.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
@@ -103,6 +103,7 @@ let maplocalleader = "\\"
 
 "directory and use of vim plugin vim-plug
 call plug#begin('~/.vim/plugged')
+Plug 'tpope/vim-fugitive'
 Plug 'morhetz/gruvbox'
 Plug 'tpope/vim-surround'
 Plug 'vim-scripts/dbext.vim'
@@ -116,11 +117,13 @@ call plug#end()
 
 packadd! srcery-vim
 
-if strftime ('%H') > 19 
+if strftime ('%H') > 22 
     colorscheme gruvbox
+    set background=dark
 elseif strftime ('%H') < 7
     colorscheme gruvbox
-elseif strftime ('%H') > 17
+    set background=dark
+elseif strftime ('%H') > 16
     colorscheme solarized
     set background=dark
 else
@@ -155,9 +158,9 @@ nnoremap <c-h> <c-w>h
 " I should just be more careful, but I hate that this can mess with my code
 " without me realizing it, so I'm going to remap the lowercase function to
 " require a leader
-" nnoremap gu          :echoe "use leader l"<cr> 
+" nnoremap gu          :echoe use leader l"<cr> 
 " nnoremap <leader>l   gu
-" vnoremap u :echoe "user leader l"<cr>
+" vnoremap u :echoe user leader l"<cr>
 " vnoremap <leader>l u
 
 "some vimscript practice
@@ -202,7 +205,7 @@ let g:slime_bracketed_paste = 1
 " nnoremap <Leader>f :NERDTreeFind<CR>
 
 
-" gundo  --------------------
+" " gundo  --------------------
 " nnoremap <Leader>u :GundoToggle<CR>
 " if has('python3')
 "     let g:gundo_prefer_python3 = 1
@@ -243,7 +246,11 @@ let g:ale_sign_column_always = 1
 " sign column color
 highlight clear SignColumn
 "enable python linter
-let g:ale_linters = {'python': ['pyflakes'], 'cpp': ['cc']}
+let g:ale_linters = {'python': ['pyflakes'], 'cpp': ['cc'], }
+
+let g:ale_linters = {
+    \ 'javascript': ['eslint'],
+    \}
 
 "ctrlp mapping ----------------------
 " let g:ctrlp_map = '<c-p>'
@@ -263,5 +270,9 @@ autocmd FileType haskell imap <buffer> <F9> <esc>:w<CR>:exec '!ghc' shellescape(
 autocmd FileType cpp map <buffer> <F9> :w<CR>:exec '!g++' shellescape(@%, 1)<CR>
 autocmd FileType cpp imap <buffer> <F9> <esc>:w<CR>:exec '!g++' shellescape(@%, 1)<CR>
 
+" running javascript on vim -------------------
+autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 expandtab softtabstop=2
 
-  
+" ocaml compatibility --------  
+set rtp^="/home/reiro/.opam/default/share/ocp-indent/vim"
+

@@ -10,11 +10,11 @@ export EDITOR=vim
 
 #Attempting to set konsole color based on the time.
 h=`date +%k`
-if [ $h -gt 19 ]; then
+if [ $h -gt 22 ]; then
     konsoleprofile colors=Gruvbox
 elif [ $h -lt 7 ] ; then
     konsoleprofile colors=Gruvbox
-elif [ $h -gt 17 ] ; then
+elif [ $h -gt 16 ] ; then
     konsoleprofile colors=Solarized
 else
     konsoleprofile colors=SolarizedLight
