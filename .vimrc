@@ -103,6 +103,7 @@ let maplocalleader = "\\"
 
 "directory and use of vim plugin vim-plug
 call plug#begin('~/.vim/plugged')
+Plug 'sirver/ultisnips'
 Plug 'tpope/vim-fugitive'
 Plug 'morhetz/gruvbox'
 Plug 'tpope/vim-surround'
