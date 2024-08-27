@@ -216,7 +216,7 @@ let g:slime_bracketed_paste = 1
 let g:UltiSnipsExpandTrigger       = '<Tab>'    " use Tab to expand snippets
 let g:UltiSnipsJumpForwardTrigger  = 'jk'    " use jk to move forward through tabstops
 let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'  " use Shift-Tab to move backward through tabstops
-let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips'] " ultisnips only goes through this file 
+let g:UltiSnipsSnippetDirectories=['~/.vim/UltiSnips'] " ultisnips only goes through this file 
 
 " psql? --------------------
 au BufRead /tmp/psql.edit.* set syntax=sql
