@@ -139,4 +139,6 @@ alias odin="cd ~/repos/dynamic-ui/"
 alias code="cd ~/Desktop/Programming/Coding/code"
 alias c="cd"
 alias ulti="cd ~/.vim/UltiSnips"
+alias nx="cd /etc/nixos && sudo vim configuration.nix"
+alias nxr="sudo nixos-rebuild switch"
 

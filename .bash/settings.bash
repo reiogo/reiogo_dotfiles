@@ -6,6 +6,7 @@ shopt -s histappend # append to history file
 export HISTIGNORE='&:clear:ls:cd:[bf]g:exit:[ t\]*'
 
 export EDITOR=vim
+set -o vi
 
 
 #Attempting to set konsole color based on the time.
