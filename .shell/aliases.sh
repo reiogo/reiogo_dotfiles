@@ -135,10 +135,10 @@ fpr() {
 alias peek='tee >(cat 1>&2)'
 
 alias mit="cd ~/Desktop/Programming/Python/mitpython/PS/6.0002/PS1"
-alias odin="cd ~/repos/dynamic-ui/"
+alias odin="cd ~/repos/weather_app/"
 alias code="cd ~/Desktop/Programming/Coding/code"
 alias c="cd"
 alias ulti="cd ~/.vim/UltiSnips"
-alias nx="cd /etc/nixos && sudo vim configuration.nix"
-alias nxr="sudo nixos-rebuild switch"
+alias nx="pushd /etc/nixos && bash ./nixos-rebuild.sh && popd"
+alias nxj="pushd /etc/nixos"
 

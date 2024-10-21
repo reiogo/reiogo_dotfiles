@@ -24,8 +24,8 @@ fi
 
 #User info
 
-export USERNAME="Ray Ogoda"
-export NICKNAME="Ray"
+export USERNAME="RO"
+export NICKNAME="R"
 
 #Welcome message
 echo -ne "Hey $NICKNAME! It's currently: "; date

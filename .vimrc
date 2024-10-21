@@ -111,6 +111,7 @@ let maplocalleader = "\\"
 
 "directory and use of vim plugin vim-plug
 call plug#begin('~/.vim/plugged')
+Plug 'honza/vim-snippets'
 Plug 'sirver/ultisnips'
 Plug 'tpope/vim-fugitive'
 Plug 'morhetz/gruvbox'
@@ -224,7 +225,6 @@ let g:slime_bracketed_paste = 1
 let g:UltiSnipsExpandTrigger       = '<Tab>'    " use Tab to expand snippets
 let g:UltiSnipsJumpForwardTrigger  = 'jk'    " use jk to move forward through tabstops
 let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'  " use Shift-Tab to move backward through tabstops
-let g:UltiSnipsSnippetDirectories=['~/.vim/UltiSnips'] " ultisnips only goes through this file 
 
 " psql? --------------------
 au BufRead /tmp/psql.edit.* set syntax=sql
@@ -245,20 +245,23 @@ nmap <leader>c <Plug>(vimtex-compile-ss)
 nnoremap <localleader>s <Cmd>call UltiSnips#RefreshSnippets()<CR>
 
 " ale --------------------
+" Error shown only when on the line
+let g:ale_virtualtext_cursor = 'current'
 " Virtual text color
 highlight ALEVirtualTextError ctermfg=Black
 " the sign in the sign gutter
-let g:ale_sign_warning = '--'
-let g:ale_sign_warning = "->"
+let g:ale_sign_error = "X"
+let g:ale_sign_warning = "W"
 " sign gutter alway on
 let g:ale_sign_column_always = 1
 " sign column color
 highlight clear SignColumn
+" 
 "enable python linter
-let g:ale_linters = {'python': ['pyflakes'], 'cpp': ['cc'], }
-
 let g:ale_linters = {
     \ 'javascript': ['eslint'],
+    \ 'python': ['pyflakes'],
+    \ 'cpp': ['cc'] 
     \}
 
 "ctrlp mapping ----------------------
